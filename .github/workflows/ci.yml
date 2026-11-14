@@ -1,16 +1,16 @@
 name: RaceDay CI/CD
 
-"on":
+on:
  push:
-  branches: [ "main" ]
+  branches: ["master"]
  pull_request:
-  branches: [ "main" ]
+  branches: ["master"]
 
 jobs:
  build:
-  runs-on:  windows-latest
- steps: 
--  name:   Checkout code
+  runs-on: windows-latest
+ steps:
+- name: Checkout code
 uses: actions/checkout@v4
 - name: Setup .NET
 uses: actions/setup-dotnet@v4
@@ -22,7 +22,3 @@ run: dotnet restore
 run: dotnet build --no-restore --configuration Release
 - name: Test
 run: dotnet test --no-build --verbosity normal
-- name: Publish API
-run: dotnet publish RaceDay.API/RaceDay.API.csproj -c Release -o publish-api
-- name: Publish MVC
-run: dotnet publish RaceDay.MVC/RaceDay.MVC.csproj -c Release -o publish-mvc
