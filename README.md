@@ -56,7 +56,7 @@ cd RaceDay.MVC
 docker build -t raceday-mvc .
 docker run -p 8080:8080 -e ApiBaseUrl=http://host.docker.internal:5000/ raceday-mvc
 ```
-Open http://localhost:8080
+Open http://localhost:7001
 
 ## Submission extras (add yourself)
 - `docs/ERD.png`, `docs/ci-green.png` (screenshot of the green GitHub Actions run)
