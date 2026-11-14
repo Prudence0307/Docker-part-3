@@ -1,0 +1,9 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "build-api", "command": "dotnet", "type": "process", "args": ["build", "${workspaceFolder}/RaceDay.API"], "problemMatcher": "$msCompile" },
+    { "label": "build-mvc", "command": "dotnet", "type": "process", "args": ["build", "${workspaceFolder}/RaceDay.MVC"], "problemMatcher": "$msCompile" },
+    { "label": "build", "command": "dotnet", "type": "process", "args": ["build", "${workspaceFolder}/RaceDay.sln"], "problemMatcher": "$msCompile", "group": { "kind": "build", "isDefault": true } },
+    { "label": "test", "command": "dotnet", "type": "process", "args": ["test", "${workspaceFolder}/RaceDay.sln"], "problemMatcher": "$msCompile", "group": "test" }
+  ]
+}

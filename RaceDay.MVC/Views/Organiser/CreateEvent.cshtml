@@ -1,0 +1,16 @@
+@{ ViewData["Title"] = "Create Event"; }
+<h2>Create Event</h2>
+<form method="post" enctype="multipart/form-data">
+  <input name="title" placeholder="Title" required /><br/>
+  <input name="description" placeholder="Description" /><br/>
+  <input name="eventDate" type="datetime-local" required /><br/>
+  <input name="location" placeholder="Location" required /><br/>
+  <select name="eventType"><option>Run</option><option>Walk</option><option>Cycle</option></select><br/>
+  <select name="categoryId">
+    <option value="1">5km</option>
+    <option value="2">10km</option>
+    <option value="3">21km</option>
+  </select><br/>
+  <label>Banner</label><input type="file" name="banner" /><br/>
+  <button type="submit">Create</button>
+</form>

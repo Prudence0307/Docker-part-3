@@ -1,0 +1,26 @@
+@{
+  ViewData["Title"] = "Capture Results";
+  var enrols = ViewBag.Enrols as List<System.Text.Json.JsonElement>;
+}
+<h2>Capture Results</h2>
+@if (enrols == null || enrols.Count == 0)
+{
+  <p>No participants are enrolled in this event yet.</p>
+}
+else
+{
+  <form method="post" action="/Organiser/SaveResult">
+    <input type="hidden" name="eventId" value="@ViewBag.EventId" />
+    <label>Participant</label>
+    <select name="enrolmentId" required>
+      @foreach (var en in enrols)
+      {
+        <option value="@(en.GetProperty("enrolmentId").GetInt32())">@(en.GetProperty("user").GetProperty("fullName").GetString())</option>
+      }
+    </select><br/>
+    <input name="finishTime" placeholder="00:45:30" required />
+    <input name="position" type="number" placeholder="Position" required />
+    <input name="totalFinishers" type="number" value="312" required />
+    <button type="submit">Save Result</button>
+  </form>
+}

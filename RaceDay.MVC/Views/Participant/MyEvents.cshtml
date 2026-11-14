@@ -1,0 +1,17 @@
+@model List<System.Text.Json.JsonElement>?
+@{ ViewData["Title"] = "My Events"; }
+<h2>My Events</h2>
+@if (Model == null || Model.Count == 0)
+{
+  <p>You have not enrolled in any events yet.</p>
+}
+else
+{
+  foreach (var e in Model)
+  {
+    <div class="event-card">
+      <h3>@(e.GetProperty("event").GetProperty("title").GetString())</h3>
+      <span class="status-@(e.GetProperty("status").GetString())">@(e.GetProperty("status").GetString())</span>
+    </div>
+  }
+}

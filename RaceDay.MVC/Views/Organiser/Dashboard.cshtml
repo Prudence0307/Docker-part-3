@@ -1,0 +1,22 @@
+@{
+  ViewData["Title"] = "Organiser Dashboard";
+  var events = ViewBag.Events as List<System.Text.Json.JsonElement>;
+}
+<h2>Organiser Dashboard</h2>
+<p>Total enrolments: <b>@ViewBag.TotalEnrolments</b></p>
+<a href="/Organiser/CreateEvent">Create Event</a>
+<table class="table">
+  <tr><th>Event</th><th>Date</th><th>Type</th><th></th></tr>
+  @if (events != null)
+  {
+    foreach (var e in events)
+    {
+      <tr>
+        <td>@(e.GetProperty("title").GetString())</td>
+        <td>@(e.GetProperty("eventDate").GetString())</td>
+        <td>@(e.GetProperty("eventType").GetString())</td>
+        <td><a href="/Organiser/Results?eventId=@(e.GetProperty("eventId").GetInt32())">Capture results</a></td>
+      </tr>
+    }
+  }
+</table>

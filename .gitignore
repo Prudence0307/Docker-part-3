@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.log
+TestResults/
+RaceDay.API/wwwroot/banners/*
+!RaceDay.API/wwwroot/banners/.gitkeep
+.idea/

@@ -1,0 +1,28 @@
+@model List<System.Text.Json.JsonElement>?
+@functions {
+  string Ordinal(int n)
+  {
+    var suffix = (n % 100 is 11 or 12 or 13) ? "th" : (n % 10) switch { 1 => "st", 2 => "nd", 3 => "rd", _ => "th" };
+    return n + suffix;
+  }
+}
+@{ ViewData["Title"] = "My Results"; }
+<h2>My Results</h2>
+@if (Model == null || Model.Count == 0)
+{
+  <p>No results captured yet.</p>
+}
+else
+{
+  <table class="table">
+    <tr><th>Event</th><th>Finish time</th><th>Position</th></tr>
+    @foreach (var r in Model)
+    {
+      <tr>
+        <td>@(r.GetProperty("enrolment").GetProperty("event").GetProperty("title").GetString())</td>
+        <td>@(r.GetProperty("finishTime").GetString())</td>
+        <td>@Ordinal(r.GetProperty("position").GetInt32()) out of @(r.GetProperty("totalFinishers").GetInt32())</td>
+      </tr>
+    }
+  </table>
+}

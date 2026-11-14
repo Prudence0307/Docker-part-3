@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "API",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-api",
+      "program": "${workspaceFolder}/RaceDay.API/bin/Debug/net8.0/RaceDay.API.dll",
+      "cwd": "${workspaceFolder}/RaceDay.API",
+      "env": { "ASPNETCORE_ENVIRONMENT": "Development", "ASPNETCORE_URLS": "https://localhost:7001" },
+      "serverReadyAction": { "action": "openExternally", "pattern": "Now listening on: (https://\\S+)", "uriFormat": "%s/swagger" }
+    },
+    {
+      "name": "MVC",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-mvc",
+      "program": "${workspaceFolder}/RaceDay.MVC/bin/Debug/net8.0/RaceDay.MVC.dll",
+      "cwd": "${workspaceFolder}/RaceDay.MVC",
+      "env": { "ASPNETCORE_ENVIRONMENT": "Development", "ASPNETCORE_URLS": "https://localhost:7002" },
+      "serverReadyAction": { "action": "openExternally", "pattern": "Now listening on: (https://\\S+)", "uriFormat": "%s" }
+    }
+  ],
+  "compounds": [
+    { "name": "API + MVC", "configurations": ["API", "MVC"] }
+  ]
+}

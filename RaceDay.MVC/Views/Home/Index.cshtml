@@ -1,0 +1,52 @@
+@model List<System.Text.Json.JsonElement>?
+@functions {
+  string FormatDate(System.Text.Json.JsonElement e)
+  {
+    var raw = e.GetProperty("eventDate").GetString();
+    return DateTime.TryParse(raw, out var d) ? d.ToString("dd MMM yyyy HH:mm") : raw ?? "";
+  }
+}
+@{
+  ViewData["Title"] = "All Events";
+  var role = Context.Session.GetString("Role");
+  var apiBase = (string)ViewBag.ApiBase;
+}
+<h2>All Events</h2>
+<div class="mb-3">
+  <a class="btn btn-outline-primary btn-sm" href="/">All</a>
+  <a class="btn btn-outline-primary btn-sm" href="/?type=Run">Run</a>
+  <a class="btn btn-outline-primary btn-sm" href="/?type=Walk">Walk</a>
+  <a class="btn btn-outline-primary btn-sm" href="/?type=Cycle">Cycle</a>
+</div>
+@if (Model == null)
+{
+  <p class="text-danger">Could not load events. Make sure RaceDay.API is running.</p>
+}
+else if (Model.Count == 0)
+{
+  <p>No events found.</p>
+}
+else
+{
+  foreach (var e in Model)
+  {
+    var banner = e.GetProperty("bannerImageUrl").GetString();
+    <div class="event-card">
+      @if (!string.IsNullOrEmpty(banner))
+      {
+        var src = banner.StartsWith("/") ? apiBase + banner : banner;
+        <img src="@src" alt="Event banner" style="max-width:300px" />
+      }
+      <h3>@(e.GetProperty("title").GetString())</h3>
+      <p>@(e.GetProperty("location").GetString()) - @FormatDate(e) (@(e.GetProperty("eventType").GetString()))</p>
+      @if (role == "Participant")
+      {
+        <a class="btn btn-success btn-sm" href="/Participant/Enrol?eventId=@(e.GetProperty("eventId").GetInt32())">Enrol</a>
+      }
+      else if (role == null)
+      {
+        <a href="/Account/Login">Login to enrol</a>
+      }
+    </div>
+  }
+}

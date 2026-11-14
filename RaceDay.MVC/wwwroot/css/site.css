@@ -1,0 +1,15 @@
+html { font-size: 14px; }
+@media (min-width: 768px) { html { font-size: 16px; } }
+
+.raceday-header { background: #212529; color: white; padding: 12px 24px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.raceday-header .brand { font-weight: bold; font-size: 1.3rem; color: #ffc107; }
+.raceday-header a { color: #dee2e6; text-decoration: none; }
+.raceday-header a:hover { color: white; text-decoration: underline; }
+
+.event-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+
+form input, form select { margin-bottom: 8px; padding: 4px 8px; }
+form label { display: inline-block; min-width: 90px; }
+
+.status-Confirmed { background: #198754; color: white; padding: 4px 10px; border-radius: 12px; }
+.status-Pending { background: #ffc107; color: #212529; padding: 4px 10px; border-radius: 12px; }
